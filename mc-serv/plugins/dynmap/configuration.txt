@@ -40,7 +40,7 @@ components:
   - class: org.dynmap.InternalClientUpdateComponent
     sendhealth: true
     sendposition: true
-    allowwebchat: true
+    allowwebchat: false
     webchat-interval: 5
     hidewebchatip: false
     trustclientname: false
@@ -303,7 +303,7 @@ render-triggers:
   #- blockredstone
 
 # Title for the web page - if not specified, defaults to the server's name (unless it is the default of 'Unknown Server')
-#webpage-title: "Lacelde's LAN Minecraft Server"
+webpage-title: "Laclede's LAN Minecraft server"
 
 # The path where the tile-files are placed.
 tilespath: web/tiles
@@ -316,7 +316,7 @@ exportpath: export
 
 # The network-interface the webserver will bind to (0.0.0.0 for all interfaces, 127.0.0.1 for only local access).
 # If not set, uses same setting as server in server.properties (or 0.0.0.0 if not specified)
-#webserver-bindaddress: 0.0.0.0
+webserver-bindaddress: 0.0.0.0
 
 # The TCP-port the webserver will listen on.
 webserver-port: 8080
