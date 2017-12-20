@@ -1,0 +1,46 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build",
+            "type": "shell",
+            "command": "docker pull openjdk:8-jre; docker build ./linux -t ll/gamesvr-minecraft --no-cache --build-arg BUILDNODE=$env:computername;",
+            "group": "build",
+            "identifier": "build-image",
+            "problemMatcher": [],
+            "promptOnClose": true
+        },
+        {
+            "label": "Build & Execute Self Tests",
+            "type": "shell",
+            "command": "docker run -it --rm ll/gamesvr-minecraft ./ll-tests/gamesvr-minecraft.sh;",
+            "dependsOn": "build-image",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": [],
+            "promptOnClose": true
+        },
+        {
+            "label": "Build & Run Interactive Server",
+            "type": "shell",
+            "command": "docker run -it --rm --net=host ll/gamesvr-minecraft java -Xms768M -Xmx1536M -jar ./minecraft-server.jar nogui;",
+            "dependsOn": "build-image",
+            "group": "build",
+            "problemMatcher": [],
+            "promptOnClose": true
+        },
+        {
+            "label": "Build & Shell In",
+            "type": "shell",
+            "command": "docker run -it --net=host --rm ll/gamesvr-minecraft;",
+            "dependsOn": "build-image",
+            "group": "build",
+            "problemMatcher": [],
+            "promptOnClose": true
+        }
+    ]
+}
