@@ -85,7 +85,6 @@ should_lack 'invalid or corrupt jarfile' 'jar file checksum ok'
 should_have 'server.properties does not exist' 'File server.properties not checked into this repo'
 should_have 'Default game type: SURVIVAL' 'Server able to generate its own server.properties';
 should_have 'Preparing spawn area' 'Server able to generate starting world';
-should_have 'For help, type "help" or "?"' 'Server competed all pre-checks';
 
 echo $'\n\n[FINAL RESULT]';
 
