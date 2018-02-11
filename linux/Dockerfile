@@ -4,19 +4,18 @@ FROM openjdk:8-jre
 ARG BUILDNODE=unspecified
 ARG SOURCE_COMMIT=unspecified
 
-LABEL maintainer="Laclede's LAN <contact @lacledeslan.com>" `
-      com.lacledeslan.build-node=$BUILDNODE `
+RUN apt-get update && apt-get install -y `
+         procps screen &&`
+    apt-get clean &&`
+    rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*;
+
+LABEL com.lacledeslan.build-node=$BUILDNODE `
       org.label-schema.schema-version="1.0" `
       org.label-schema.url="https://github.com/LacledesLAN/README.1ST" `
       org.label-schema.vcs-ref=$SOURCE_COMMIT `
       org.label-schema.vendor="Laclede's LAN" `
       org.label-schema.description="Minecraft (Java Client) Dedicated Server in Docker" `
       org.label-schema.vcs-url="https://github.com/LacledesLAN/gamesvr-minecraft"
-
-RUN apt-get update && apt-get install -y `
-         procps screen &&`
-    apt-get clean &&`
-    rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*;
 
 # Set up Enviornment
 RUN useradd --home /app --gid root --system Minecraft &&`
