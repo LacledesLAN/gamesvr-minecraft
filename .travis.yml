@@ -23,7 +23,7 @@ notifications:
     secure: Umz9YQrerCoCNQC/PiZkjQ5KMHjQgHOXAXsuWY27chd1jrIynzAxzYIOISiJTbkNeT48Og6WNy2VNexQ9rZGBZYPokVQzoBZJ7sI/oAuUb61j7LWDUMtLIExoXUp2SNj6IlnHvyZauixy0LlwH7w8grjDIdP1h5DXJTvi1PCGrox1A55mpGOYBryFC2PPdiCGyVnClFuQUVdHmGAP0j0MDmIctsnzqFv/mBx33YhFRhzBFtUyvzOKl8XGEISsrnNZU2RFUdDZdkUhYGeVJMTXVU5ktXGdye/et6GGxX3CMGPi9rYddTjfDg4rrbP+RVQnb5CGexCYoKzKkSiFFnHGKVQgKgmleg5Y3fU549dI/IseubXfv4E6RkvXrqs9z77MHM/gn7mYMnp0jOyhCwVbxyxyqOMGn2xRj61d3xVWdwNMaEDiK7zPrCGUIq+Wy8WdH/4eSy+gybZuHnrOR2TSXTpY3iXCgfpG2ezblsr6zDdhX0AUpuzdabaRcw+UqbmxOZalrAaAh1MMt4mTZn5C+KGkep/6un72TMC6gSE2jdtHCpblLLSdwYJ3vx2AzIcjISJit3P2QMY8ePuw+81cQD2ONZhOYU2w6VKCUzWw8tLfjU3JRNPTBCo8I6E1sP7NLCIlQg/eSxnSmw6jTOnFyWwSq4CjMQBpVCswYpuAAc=
 
 before_deploy:
-  - docker login -u "$DOCKERHUB_USER" -p "$DOCKERHUB_PASS";
+  - echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USER" --password-stdin;
 deploy:
   provider: script
   script: docker push lacledeslan/gamesvr-minecraft
