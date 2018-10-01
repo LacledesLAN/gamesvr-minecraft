@@ -37,8 +37,8 @@ RUN chmod +rx /app/ll-tests/*.sh &&`
 
 USER Minecraft
 
-RUN curl -sSL "https://s3.amazonaws.com/Minecraft.Download/versions/1.12.2/minecraft_server.1.12.2.jar" -o /app/minecraft-server.jar &&`
-    echo "886945bfb2b978778c3a0288fd7fab09d315b25f /app/minecraft-server.jar" | sha1sum -c - && `
+RUN curl -sSL "https://launcher.mojang.com/v1/objects/fe123682e9cb30031eae351764f653500b7396c9/server.jar" -o /app/minecraft-server.jar &&`
+    echo "fe123682e9cb30031eae351764f653500b7396c9 /app/minecraft-server.jar" | sha1sum -c - && `
     chmod +rwx /app/*.jar;
 
 WORKDIR /app
