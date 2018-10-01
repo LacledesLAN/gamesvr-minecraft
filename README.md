@@ -6,19 +6,23 @@ Minecraft is a sandbox that allows players to build with a variety of different 
 
 This repository is maintained by [Laclede's LAN](https://lacledeslan.com). Its contents are intended to be bare-bones and used as a stock server. If any documentation is unclear or it has any issues please see [CONTRIBUTING.md](./CONTRIBUTING.md).
 
-## Download
+## Linux Container
+
+### Download
 
 ```shell
 docker pull lacledeslan/gamesvr-minecraft;
 ```
 
-## Run Self Tests
+### Run Self Tests
+
+The image includes a test script that can be used to verify its contents. No changes or pull-requests will be accepted to this repository if any tests fail.
 
 ```shell
 TODO
 ```
 
-## Run Interactive Server
+### Run Interactive Server
 
 ```shell
 TODO
