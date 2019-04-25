@@ -2,7 +2,7 @@
 
 #####################################################################################################
 ### CONFIG VARS #####################################################################################
-declare LLTEST_CMD="java -Xms128M -Xmx256M -jar /app/minecraft-server.jar nogui";
+declare LLTEST_CMD="java -Xms256M -Xmx384M -jar /app/minecraft-server.jar nogui";
 declare LLTEST_NAME="gamesvr-minecraft-$(date '+%H%M%S')";
 #####################################################################################################
 #####################################################################################################
@@ -146,7 +146,7 @@ fi;
 #####################################################################################################
 ### TESTS ###########################################################################################
 should_lack 'invalid or corrupt jarfile' 'jar file checksum ok'
-should_have 'server.properties does not exist' 'File server.properties not checked into this repo'
+should_have 'Failed to load properties from file: server.properties' 'File server.properties not checked into this repo'
 should_have 'Default game type: SURVIVAL' 'Server able to generate its own server.properties';
 should_have 'Preparing spawn area' 'Server able to generate starting world';
 #####################################################################################################

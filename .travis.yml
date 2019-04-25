@@ -11,11 +11,11 @@ services:
   - docker
 
 before_install:
-  - docker pull openjdk:8-jre
+  - docker pull openjdk:11-jre-slim
 
 script:
   - docker version
-  - docker build --no-cache --tag lltest/gamesvr-minecraft --tag lacledeslan/gamesvr-minecraft --build-arg BUILDNODE=TravisCI --build-arg SOURCE_COMMIT="$TRAVIS_COMMIT" ./linux
+  - docker build --no-cache --tag lltest/gamesvr-minecraft --tag lacledeslan/gamesvr-minecraft --build-arg BUILDNODE=TravisCI --build-arg SOURCE_COMMIT="$TRAVIS_COMMIT" -f ./linux.Dockerfile
   - docker run -it --rm lltest/gamesvr-minecraft ./ll-tests/gamesvr-minecraft.sh
 
 notifications:

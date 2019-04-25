@@ -1,5 +1,10 @@
 # escape=`
-FROM openjdk:11-jre
+FROM lacledeslan/steamcmd:linux as DOWNLOADER
+
+RUN curl -sSL "https://launcher.mojang.com/v1/objects/f1a0073671057f01aa843443fef34330281333ce/server.jar" -o /output/minecraft-server.jar &&`
+    echo "f1a0073671057f01aa843443fef34330281333ce /output/minecraft-server.jar" | sha1sum -c -;
+
+FROM openjdk:11-jre-slim
 
 ARG BUILDNODE=unspecified
 ARG SOURCE_COMMIT=unspecified
@@ -27,19 +32,15 @@ RUN useradd --home /app --gid root --system Minecraft &&`
     mkdir --parents /app &&`
     chown Minecraft:root -R /app;
 
-COPY --chown=Minecraft:root eula.txt /app/eula.txt
+COPY --chown=Minecraft:root --from=DOWNLOADER /output/minecraft-server.jar /app/minecraft-server.jar
 
-COPY --chown=Minecraft:root ./ll-tests /app/ll-tests
+COPY --chown=Minecraft:root ./dist/all /app
 
-RUN chmod +rx /app/ll-tests/*.sh &&`
-    chmod +rwx -R /app &&`
-    chown Minecraft:root -R /app/ll-tests;
+COPY --chown=Minecraft:root ./dist/linux /app
+
+RUN chmod +x /app/*.jar /app/ll-tests/*.sh;
 
 USER Minecraft
-
-RUN curl -sSL "https://launcher.mojang.com/v1/objects/3737db93722a9e39eeada7c27e7aca28b144ffa7/server.jar" -o /app/minecraft-server.jar &&`
-    echo "3737db93722a9e39eeada7c27e7aca28b144ffa7 /app/minecraft-server.jar" | sha1sum -c - && `
-    chmod +rwx /app/*.jar;
 
 WORKDIR /app
 
