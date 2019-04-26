@@ -16,7 +16,7 @@ before_install:
 script:
   - docker version
   - docker build --no-cache --tag lltest/gamesvr-minecraft --tag lacledeslan/gamesvr-minecraft --build-arg BUILDNODE=TravisCI --build-arg SOURCE_COMMIT="$TRAVIS_COMMIT" -f ./linux.Dockerfile .
-  - docker run -it --rm --network="none" lltest/gamesvr-minecraft ./ll-tests/gamesvr-minecraft.sh
+  - docker run -it --rm lltest/gamesvr-minecraft ./ll-tests/gamesvr-minecraft.sh
 
 notifications:
   slack:
