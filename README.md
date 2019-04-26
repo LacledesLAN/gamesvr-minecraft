@@ -19,13 +19,13 @@ docker pull lacledeslan/gamesvr-minecraft;
 The image includes a test script that can be used to verify its contents. No changes or pull-requests will be accepted to this repository if any tests fail.
 
 ```shell
-TODO
+docker run --rm lacledeslan/gamesvr-minecraft ./ll-tests/gamesvr-minecraft.sh
 ```
 
 ### Run Interactive Server
 
 ```shell
-TODO
+docker run -d --rm -p 25565:25565 lacledeslan/gamesvr-minecraft java -Xms512M -Xmx1024M -jar /app/minecraft-server.jar nogui
 ```
 
 ## Getting Started with Game Servers in Docker
