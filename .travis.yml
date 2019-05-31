@@ -15,8 +15,8 @@ before_install:
 
 script:
   - docker version
-  - docker build --no-cache --tag lltest/gamesvr-minecraft --tag lacledeslan/gamesvr-minecraft --build-arg BUILDNODE=TravisCI --build-arg SOURCE_COMMIT="$TRAVIS_COMMIT" -f ./linux.Dockerfile .
-  - docker run -it --rm lltest/gamesvr-minecraft ./ll-tests/gamesvr-minecraft.sh
+  - docker build --no-cache --tag lacledeslan/gamesvr-minecraft:latest --tag lacledeslan/gamesvr-minecraft:1.14.2 --build-arg BUILDNODE=TravisCI --build-arg SOURCE_COMMIT="$TRAVIS_COMMIT" -f ./linux.Dockerfile .
+  - docker run -it --rm lacledeslan/gamesvr-minecraft:latest ./ll-tests/gamesvr-minecraft.sh
 
 notifications:
   slack:
@@ -26,7 +26,9 @@ before_deploy:
   - echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USER" --password-stdin;
 deploy:
   provider: script
-  script: docker push lacledeslan/gamesvr-minecraft
+  script:
+    - docker push lacledeslan/gamesvr-minecraft:latest
+    - docker push lacledeslan/gamesvr-minecraft:1.14.2
   on:
     branch: master
 after_deploy:
