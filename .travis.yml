@@ -1,10 +1,6 @@
 sudo: required
 os: linux
 language: minimal
-addons:
-  apt:
-    packages:
-    - docker-ce
 git:
   depth: 4
 services:
@@ -25,11 +21,13 @@ notifications:
 before_deploy:
   - echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USER" --password-stdin;
 deploy:
-  provider: script
-  script:
-    - docker push lacledeslan/gamesvr-minecraft:latest
-    - docker push lacledeslan/gamesvr-minecraft:1.14.3
-  on:
-    branch: master
+  - provider: script
+    script: docker push lacledeslan/gamesvr-minecraft:latest
+    on:
+      branch: master
+  - provider: script
+    script: docker push lacledeslan/gamesvr-minecraft:1.14.3
+    on:
+      branch: master
 after_deploy:
   - curl -X POST https://hooks.microbadger.com/images/lacledeslan/gamesvr-minecraft/$MICROBADGER_TOKEN
