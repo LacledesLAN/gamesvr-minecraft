@@ -11,7 +11,7 @@ before_install:
 
 script:
   - docker version
-  - docker build --no-cache --tag lacledeslan/gamesvr-minecraft:latest --tag lacledeslan/gamesvr-minecraft:1.14.3 --build-arg BUILDNODE=TravisCI --build-arg SOURCE_COMMIT="$TRAVIS_COMMIT" -f ./linux.Dockerfile .
+  - docker build --no-cache --tag lacledeslan/gamesvr-minecraft:latest --tag lacledeslan/gamesvr-minecraft:1.14.4 --build-arg BUILDNODE=TravisCI --build-arg SOURCE_COMMIT="$TRAVIS_COMMIT" -f ./linux.Dockerfile .
   - docker run -it --rm lacledeslan/gamesvr-minecraft:latest ./ll-tests/gamesvr-minecraft.sh
 
 notifications:
@@ -26,7 +26,7 @@ deploy:
     on:
       branch: master
   - provider: script
-    script: docker push lacledeslan/gamesvr-minecraft:1.14.3
+    script: docker push lacledeslan/gamesvr-minecraft:1.14.4
     on:
       branch: master
 after_deploy:
