@@ -19,4 +19,4 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
           repository: lacledeslan/gamesvr-minecraft
           short-description: "Minecraft Dedicated Server in Docker"
-          readme-filepath: ./readme.md
+          readme-filepath: ./README.md
