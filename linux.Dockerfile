@@ -4,7 +4,7 @@ FROM lacledeslan/steamcmd:linux as DOWNLOADER
 RUN curl -sSL "https://launcher.mojang.com/v1/objects/a16d67e5807f57fc4e550299cf20226194497dc2/server.jar" -o /output/minecraft-server.jar &&`
     echo "a16d67e5807f57fc4e550299cf20226194497dc2 /output/minecraft-server.jar" | sha1sum -c -;
 
-FROM openjdk:11-jre-slim
+FROM openjdk:18-slim
 
 ARG BUILDNODE=unspecified
 ARG SOURCE_COMMIT=unspecified

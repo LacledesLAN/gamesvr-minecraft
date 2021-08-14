@@ -20,7 +20,7 @@ jobs:
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1.2.0
       - name: Pull Latest Linux Base Image
-        run: docker pull openjdk:11-jre-slim
+        run: docker pull openjdk:18-slim
       - name: Build Linux Image
         uses: docker/build-push-action@v2.6.1
         with:
