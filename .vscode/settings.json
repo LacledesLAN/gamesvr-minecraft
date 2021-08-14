@@ -1,7 +1,14 @@
 {
     "files.encoding": "utf8",
     "cSpell.words": [
+        "dockerhub",
         "gamesvr",
-        "lacledeslan"
+        "ghcr",
+        "lacledeslan",
+        "minecraft",
+        "openjdk",
+        "qemu",
+        "token",
+        "username"
     ],
 }
