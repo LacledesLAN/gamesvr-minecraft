@@ -4,15 +4,12 @@ FROM lacledeslan/steamcmd:linux as DOWNLOADER
 RUN curl -sSL "https://launcher.mojang.com/v1/objects/125e5adf40c659fd3bce3e66e67a16bb49ecc1b9/server.jar" -o /output/minecraft-server.jar &&`
     echo "125e5adf40c659fd3bce3e66e67a16bb49ecc1b9 /output/minecraft-server.jar" | sha1sum -c -;
 
-FROM openjdk:19-slim as BUILDER
+FROM openjdk:17-oracle as BUILDER
 
 COPY --chown=Minecraft:root --from=DOWNLOADER /output/minecraft-server.jar /output/minecraft-server.jar
 
-# Build list of Java dependencies, exclude java.base.* as final runtime will always include java.base.
-RUN jdeps --multi-release 17 --ignore-missing-deps --list-deps /output/minecraft-server.jar | grep -v "java.base" | sed -z 's/\n/,/g;s/,$/\n/' | tr -d " \t\n\r" > /output/deps.info
-
-# Build custom Java runtime from list of Java dependencies.
-RUN jlink --no-header-files --no-man-pages --compress=1 --strip-java-debug-attributes --add-modules $(cat /output/deps.info),jdk.zipfs --output /output/jre
+# Build custom JRE
+RUN jlink --no-header-files --no-man-pages --compress=2 --strip-debug --add-modules java.compiler,java.desktop,java.management,java.naming,java.rmi,java.scripting,java.sql,jdk.sctp,jdk.unsupported,jdk.zipfs --output /output/jre
 
 FROM debian:bullseye-slim
 

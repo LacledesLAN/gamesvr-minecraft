@@ -4,11 +4,10 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Build",
+            "label": "Build Linux Image",
             "type": "shell",
-            "command": "docker pull lacledeslan/steamcmd:linux; docker pull openjdk:11-jre-slim; docker build -f ./linux.Dockerfile -t lltest/gamesvr-minecraft --no-cache --build-arg BUILDNODE=$env:computername .;",
+            "command": "docker pull lacledeslan/steamcmd:linux; docker pull openjdk:17-oracle; docker pull debian:bullseye-slim; docker build --rm -f ./linux.Dockerfile -t lltest/gamesvr-minecraft --no-cache --build-arg BUILDNODE=$env:computername .;",
             "group": "build",
-            "identifier": "build-image",
             "problemMatcher": [],
             "promptOnClose": true
         },
@@ -16,7 +15,7 @@
             "label": "Build & Execute Self Tests",
             "type": "shell",
             "command": "docker run -it --rm lltest/gamesvr-minecraft ./ll-tests/gamesvr-minecraft.sh;",
-            "dependsOn": "build-image",
+            "dependsOn": "Build Linux Image",
             "group": {
                 "kind": "build",
                 "isDefault": true
@@ -28,7 +27,7 @@
             "label": "Build & Run Interactive Server",
             "type": "shell",
             "command": "docker run -it --rm --net=host lltest/gamesvr-minecraft java -Xms768M -Xmx1536M -jar ./minecraft-server.jar nogui;",
-            "dependsOn": "build-image",
+            "dependsOn": "Build Linux Image",
             "group": "build",
             "problemMatcher": [],
             "promptOnClose": true
@@ -37,7 +36,7 @@
             "label": "Build & Shell In",
             "type": "shell",
             "command": "docker run -it --net=host --rm lltest/gamesvr-minecraft;",
-            "dependsOn": "build-image",
+            "dependsOn": "Build Linux Image",
             "group": "build",
             "problemMatcher": [],
             "promptOnClose": true
