@@ -17,7 +17,7 @@ and used as a stock server. If any documentation is unclear or it has any issues
 
 ## Linux Java Container
 
-[![java linux/amd64](https://github.com/LacledesLAN/gamesvr-minecraft/actions/workflows/build-linux-java-image.yml/badge.svg?branch=master)](https://github.com/LacledesLAN/gamesvr-minecraft/actions/workflows/build-linux-java-image.yml)
+[![java linux/amd64](https://github.com/LacledesLAN/gamesvr-minecraft/actions/workflows/build-linux-java-image.yml/badge.svg)](https://github.com/LacledesLAN/gamesvr-minecraft/actions/workflows/build-linux-java-image.yml)
 
 ### Download
 
@@ -41,6 +41,8 @@ docker run -d --rm -p 25565:25565 lacledeslan/gamesvr-minecraft:java java -Xms51
 ```
 
 ## Linux Bedrock Container
+
+[![bedrock linux/amd64](https://github.com/LacledesLAN/gamesvr-minecraft/actions/workflows/build-linux-bedrock-image.yml/badge.svg)](https://github.com/LacledesLAN/gamesvr-minecraft/actions/workflows/build-linux-bedrock-image.yml)
 
 ### Download
 
