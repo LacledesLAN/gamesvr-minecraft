@@ -1,12 +1,17 @@
-# THIS DOCKERFILE IS NOT KEPT UP TO DATE - IT EXISTS AS A BACKUP. USE `linux.Dockerfile` INSTEAD.
-
 # escape=`
 FROM lacledeslan/steamcmd:linux as DOWNLOADER
 
-RUN curl -sSL "https://launcher.mojang.com/v1/objects/125e5adf40c659fd3bce3e66e67a16bb49ecc1b9/server.jar" -o /output/minecraft-server.jar &&`
-    echo "125e5adf40c659fd3bce3e66e67a16bb49ecc1b9 /output/minecraft-server.jar" | sha1sum -c -;
+RUN curl -sSL "https://launcher.mojang.com/v1/objects/c9df48efed58511cdd0213c56b9013a7b5c9ac1f/server.jar" -o /output/minecraft-server.jar &&`
+    echo "c9df48efed58511cdd0213c56b9013a7b5c9ac1f /output/minecraft-server.jar" | sha1sum -c -;
 
-FROM openjdk:21-slim
+FROM eclipse-temurin:19-jdk as BUILDER
+
+COPY --chown=Minecraft:root --from=DOWNLOADER /output/minecraft-server.jar /output/minecraft-server.jar
+
+# Build custom JRE
+RUN jlink --no-header-files --no-man-pages --compress=2 --strip-debug --add-modules java.compiler,java.desktop,java.management,java.naming,java.rmi,java.scripting,java.sql,jdk.sctp,jdk.unsupported,jdk.zipfs --output /output/jre
+
+FROM debian:bullseye-slim
 
 ARG BUILDNODE=unspecified
 ARG SOURCE_COMMIT=unspecified
@@ -36,9 +41,13 @@ RUN useradd --home /app --gid root --system Minecraft &&`
 
 COPY --chown=Minecraft:root --from=DOWNLOADER /output/minecraft-server.jar /app/minecraft-server.jar
 
+COPY --chown=Minecraft:root --from=BUILDER /output/jre /app/jre
+
+ENV PATH "/app/jre/bin/:$PATH"
+
 COPY --chown=Minecraft:root ./dist/all /app
 
-COPY --chown=Minecraft:root ./dist/linux /app
+COPY --chown=Minecraft:root ./dist/linux/ll-tests/gamesvr-java-minecraft.sh /app/ll-tests/gamesvr-java-minecraft.sh
 
 RUN chmod +x /app/*.jar /app/ll-tests/*.sh;
 

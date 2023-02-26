@@ -4,7 +4,7 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Build Linux Image",
+            "label": "Java Edition - Build Linux Image",
             "type": "shell",
             "command": "docker build --rm -f ./linux-java.Dockerfile -t lltest/gamesvr-minecraft --no-cache --build-arg BUILDNODE=$env:computername .;",
             "group": "build",
@@ -12,7 +12,7 @@
             "promptOnClose": true
         },
         {
-            "label": "Build & Execute Self Tests",
+            "label": "Java Edition - Build & Execute Self Tests",
             "type": "shell",
             "command": "docker run -it --rm lltest/gamesvr-minecraft ./ll-tests/gamesvr-minecraft.sh;",
             "dependsOn": "Build Linux Image",
@@ -20,24 +20,6 @@
                 "kind": "build",
                 "isDefault": true
             },
-            "problemMatcher": [],
-            "promptOnClose": true
-        },
-        {
-            "label": "Build & Run Interactive Server",
-            "type": "shell",
-            "command": "docker run -it --rm --net=host lltest/gamesvr-minecraft java -Xms768M -Xmx1536M -jar ./minecraft-server.jar nogui;",
-            "dependsOn": "Build Linux Image",
-            "group": "build",
-            "problemMatcher": [],
-            "promptOnClose": true
-        },
-        {
-            "label": "Build & Shell In",
-            "type": "shell",
-            "command": "docker run -it --net=host --rm lltest/gamesvr-minecraft;",
-            "dependsOn": "Build Linux Image",
-            "group": "build",
             "problemMatcher": [],
             "promptOnClose": true
         }

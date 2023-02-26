@@ -2,8 +2,8 @@
 
 #####################################################################################################
 ### CONFIG VARS #####################################################################################
-declare LLTEST_CMD="java -jar /app/minecraft-server.jar nogui";
-declare LLTEST_NAME="gamesvr-minecraft-$(date '+%H%M%S')";
+declare LLTEST_CMD="./bedrock_server";
+declare LLTEST_NAME="gamesvr-bedrock-minecraft-$(date '+%H%M%S')";
 #####################################################################################################
 #####################################################################################################
 
@@ -118,7 +118,7 @@ while true; do
         #    break;
         #fi;
 
-        if (( "$LLCOUNTER" > 120 )); then
+        if (( "$LLCOUNTER" > 60 )); then
             echo $'times up.\n';
             #LLBOOT_ERRORS="Test timed out";
             break;
@@ -146,10 +146,8 @@ fi;
 
 #####################################################################################################
 ### TESTS ###########################################################################################
-should_lack 'invalid or corrupt jarfile' 'jar file checksum ok'
-should_have 'Failed to load properties from file: server.properties' 'File server.properties not checked into this repo'
-should_have 'Default game type: SURVIVAL' 'Server able to generate its own server.properties';
-should_have 'Preparing spawn area' 'Server able to generate starting world';
+should_have 'Server started.' 'server started'
+should_lack 'error while loading shared libraries' 'no errors loading libraries'
 #####################################################################################################
 #####################################################################################################
 
