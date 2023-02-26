@@ -1,8 +1,8 @@
 # escape=`
 FROM lacledeslan/steamcmd:linux as DOWNLOADER
 
-RUN curl -sSL "https://launcher.mojang.com/v1/objects/125e5adf40c659fd3bce3e66e67a16bb49ecc1b9/server.jar" -o /output/minecraft-server.jar &&`
-    echo "125e5adf40c659fd3bce3e66e67a16bb49ecc1b9 /output/minecraft-server.jar" | sha1sum -c -;
+RUN curl -sSL "https://launcher.mojang.com/v1/objects/c9df48efed58511cdd0213c56b9013a7b5c9ac1f/server.jar" -o /output/minecraft-server.jar &&`
+    echo "c9df48efed58511cdd0213c56b9013a7b5c9ac1f /output/minecraft-server.jar" | sha1sum -c -;
 
 FROM eclipse-temurin:19-jdk as BUILDER
 
