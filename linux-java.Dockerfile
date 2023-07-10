@@ -1,10 +1,14 @@
 # escape=`
 FROM lacledeslan/steamcmd:linux as DOWNLOADER
 
-RUN curl -sSL "https://launcher.mojang.com/v1/objects/c9df48efed58511cdd0213c56b9013a7b5c9ac1f/server.jar" -o /output/minecraft-server.jar &&`
-    echo "c9df48efed58511cdd0213c56b9013a7b5c9ac1f /output/minecraft-server.jar" | sha1sum -c -;
+RUN curl -sSL "https://piston-data.mojang.com/v1/objects/84194a2f286ef7c14ed7ce0090dba59902951553/server.jar" -o /output/minecraft-server.jar &&`
+    echo "84194a2f286ef7c14ed7ce0090dba59902951553 /output/minecraft-server.jar" | sha1sum -c -;
 
 FROM eclipse-temurin:20-jdk as BUILDER
+
+RUN useradd --home /app --gid root --system Minecraft &&`
+    mkdir --parents /app &&`
+    chown Minecraft:root -R /app;
 
 COPY --chown=Minecraft:root --from=DOWNLOADER /output/minecraft-server.jar /output/minecraft-server.jar
 
