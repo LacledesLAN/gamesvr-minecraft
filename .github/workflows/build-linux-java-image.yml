@@ -18,7 +18,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Set up QEMU
-        uses: docker/setup-qemu-action@v2.2.0
+        uses: docker/setup-qemu-action@v3.0.0
       - name: Pull latest JDK Linux image
         run: docker pull eclipse-temurin:19-jdk
       - name: Pull latest base image
