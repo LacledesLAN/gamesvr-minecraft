@@ -4,7 +4,7 @@ FROM lacledeslan/steamcmd:linux as DOWNLOADER
 RUN curl -sSL "https://piston-data.mojang.com/v1/objects/84194a2f286ef7c14ed7ce0090dba59902951553/server.jar" -o /output/minecraft-server.jar &&`
     echo "84194a2f286ef7c14ed7ce0090dba59902951553 /output/minecraft-server.jar" | sha1sum -c -;
 
-FROM eclipse-temurin:20-jdk as BUILDER
+FROM eclipse-temurin:21-jdk as BUILDER
 
 RUN useradd --home /app --gid root --system Minecraft &&`
     mkdir --parents /app &&`
