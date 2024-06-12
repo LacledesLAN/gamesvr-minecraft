@@ -24,7 +24,7 @@ jobs:
       - name: Pull latest base image
         run: docker pull debian:bullseye-slim
       - name: Build Java Linux Image
-        uses: docker/build-push-action@v5.3.0
+        uses: docker/build-push-action@v5.4.0
         with:
           context: .
           file: ./linux-java.Dockerfile
