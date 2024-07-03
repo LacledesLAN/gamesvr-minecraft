@@ -22,7 +22,7 @@ jobs:
       - name: Pull latest base image
         run: docker pull debian:bullseye-slim
       - name: Build Bedrock Linux Image
-        uses: docker/build-push-action@v6.2.0
+        uses: docker/build-push-action@v6.3.0
         with:
           context: .
           file: ./linux-bedrock.Dockerfile
